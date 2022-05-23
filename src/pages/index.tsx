@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
-import Main from './main';
+import MainPage from './main';
 
 const Routes: React.FC = () => {
-  return useRoutes([Main]);
-}
+  return useRoutes([MainPage]);
+};
 
 export default Routes;

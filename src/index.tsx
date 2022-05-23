@@ -5,8 +5,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
 const root = document.querySelector('#app');
-console.error('루트를 찾을 수 없습니다.');
+
 if (root === null) {
+  console.error('루트를 찾을 수 없습니다.');
 } else {
   createRoot(root).render(
     <Router>
