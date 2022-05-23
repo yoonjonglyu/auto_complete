@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/yoonjonglyu/webpack-init-template#readme",
   "dependencies": {
+    "@types/underscore": "^1.11.4",
     "axios": "^0.27.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
