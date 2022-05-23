@@ -11,7 +11,7 @@ class HackerNewsApi {
     return data;
   }
   async getSearchKeyword(keyword: string) {
-    const { data } = await Axios.get(`${this.apiUri}search?query=${keyword}`);
+    const { data } = await Axios.get(`${this.apiUri}search?query=${keyword}&tags=story`);
 
     return data.hits || [];
   }
