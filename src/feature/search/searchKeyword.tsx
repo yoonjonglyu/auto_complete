@@ -1,12 +1,11 @@
 import React from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import _ from 'underscore';
 import Styled, { createGlobalStyle } from 'styled-components';
 
 import SearchKeywordState from '../../store/searchkeyword';
 import SearchItemState from '../../store/searchItem';
 
-import SearchApi from '../../lib/api/search';
+import { debounsItem } from '../../lib/hooks/search';
 
 const KeywordStyle = createGlobalStyle`
   em {
@@ -22,14 +21,6 @@ const Li = Styled.li`
   padding: 3px;
   border-bottom: 1px solid gray;
 `;
-const debounsItem = _.debounce(
-  async (currentIdx: string, callback: Function) => {
-    const Api = new SearchApi();
-    const data = await Api.getSearchItem(currentIdx);
-    callback(data);
-  },
-  300
-);
 
 interface SearchKeywordProps {
   currentIdx: number;
