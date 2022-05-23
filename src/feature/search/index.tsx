@@ -16,7 +16,7 @@ const SearchFeature: React.FC<SearchFeatureProps> = () => {
     <main>
       <h1>검색 콤보 박스</h1>
       <SearchForm />
-      <SearchKeyword />
+      <SearchKeyword currentIdx={currentKeyword} />
     </main>
   );
 };
