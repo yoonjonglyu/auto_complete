@@ -4,3 +4,5 @@ const SearchKeywordState = atom({
   key: 'searchKeyword',
   default: [],
 });
+
+export default SearchKeywordState;
