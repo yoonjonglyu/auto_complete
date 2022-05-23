@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import searchKeywordState from '../../store/searchkeyword';
 
@@ -7,23 +7,24 @@ interface SearchKeywordProps {
   currentIdx: number;
 }
 
-const SearchKeywordForm: React.FC<SearchKeywordProps> = ({ currentIdx }) => {
-  const [searchKeyword, setSearchKeyword] = useRecoilState(searchKeywordState);
+const SearchKeyword: React.FC<SearchKeywordProps> = ({ currentIdx }) => {
+  const searchKeyword = useRecoilValue(searchKeywordState);
 
   return (
     <section>
       <ul>
-        {searchKeyword.map((keyword, idx) => (
+        {searchKeyword.map((keyword: any, idx: number) => (
           <li
             key={idx}
             style={{ background: currentIdx === idx ? 'cyan' : '' }}
-          >
-            {keyword}
-          </li>
+            dangerouslySetInnerHTML={{
+              __html: keyword._highlightResult.title.value,
+            }}
+          ></li>
         ))}
       </ul>
     </section>
   );
 };
 
-export default SearchKeywordForm;
+export default SearchKeyword;
