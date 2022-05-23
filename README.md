@@ -1,12 +1,13 @@
-# webpack
+# 콤보박스
 
-> 기본 환경 템플릿
 
 ## 목적
 
-> 웹팩으로 프론트 환경 구성 하는걸 매번 반복하기 불편하고
-> 리액트, 뷰, 스벨트, 등의 프레임워크나 바닐라 개발 환경을 각각 만들기보다 그냥
-> 웹팩만 설정된 기본 템플릿 하나를 만드는게 편할거 같아서 만들어둔다.
+> 해커뉴스 검색 기능을 제공하는 간단한 리액트 컴포넌트.  
+> 사용 스택: React, Recoil, Axios, TypeScript, Webpack, Underscore, Styled-components
+
+## 링크
+[깃허브 페이지 호스팅](https://yoonjonglyu.github.io/auto_complete/)
 
 ## DIR STRUCTURE
 
