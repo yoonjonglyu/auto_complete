@@ -5,6 +5,7 @@ import SearchKeywordState from '../../store/searchkeyword';
 
 import SearchForm from './searchForm';
 import SearchKeyword from './searchKeyword';
+import SearchResult from './searchResult';
 
 interface SearchFeatureProps {}
 
@@ -35,6 +36,7 @@ const SearchFeature: React.FC<SearchFeatureProps> = () => {
         handleSelectIdx={handleCurrentIdx}
       />
       <SearchKeyword currentIdx={currentKeyword} />
+      <SearchResult />
     </main>
   );
 };
