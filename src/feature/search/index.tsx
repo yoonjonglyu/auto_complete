@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import Styled from 'styled-components';
 
 import SearchKeywordState from '../../store/searchkeyword';
 
 import SearchForm from './searchForm';
 import SearchKeyword from './searchKeyword';
 import SearchResult from './searchResult';
+
+const Main = Styled.main`
+  width: 80%;
+  margin: 0 auto;
+`;
+const Title = Styled.h1`
+  text-align: center;
+`;
 
 interface SearchFeatureProps {}
 
@@ -29,8 +38,8 @@ const SearchFeature: React.FC<SearchFeatureProps> = () => {
   };
 
   return (
-    <main>
-      <h1>검색 콤보 박스</h1>
+    <Main>
+      <Title>검색 콤보 박스</Title>
       <SearchForm
         currentIdx={currentKeyword}
         handleSelectIdx={handleCurrentIdx}
@@ -40,7 +49,7 @@ const SearchFeature: React.FC<SearchFeatureProps> = () => {
         handleCurrentIdx={setCurrentKeyword}
       />
       <SearchResult />
-    </main>
+    </Main>
   );
 };
 
