@@ -1,26 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import _ from 'underscore';
+
+import SearchKeywordState from '../../store/searchkeyword';
+import SearchItemState from '../../store/searchItem';
+
+import SearchApi from '../../lib/api/search';
 
 interface SearchFormProps {
-  handleSelectIdx: (value: number) => void;
+  currentIdx: number;
+  handleSelectIdx: (value: 'up' | 'down' | 'reset') => void;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ handleSelectIdx }) => {
-  const [inputValue, setInputValue] = useState('');
+const debounsSearch = _.debounce(
+  async (keyword: string, callback: Function) => {
+    const Api = new SearchApi();
+    const data = await Api.getSearchKeyword(keyword);
+    callback(data);
+  },
+  300
+);
+const debounsItem = _.debounce(
+  async (currentIdx: string, callback: Function) => {
+    const Api = new SearchApi();
+    const data = await Api.getSearchItem(currentIdx);
+    callback(data);
+  },
+  300
+);
 
-  const onSubmit = (e: React.FormEvent) => {
+const SearchForm: React.FC<SearchFormProps> = ({
+  currentIdx,
+  handleSelectIdx,
+}) => {
+  const [searchKeyword, setSearchKeyword] = useRecoilState(SearchKeywordState);
+  const setSearchItem = useSetRecoilState(SearchItemState);
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(inputValue);
+    if (searchKeyword[currentIdx]) {
+      await debounsItem(searchKeyword[currentIdx].objectID, setSearchItem);
+    }
   };
-  const handleSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+  const handleSearchKeyword = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    await debounsSearch(e.target.value, setSearchKeyword);
+    handleSelectIdx('reset');
   };
-  const handleSelectItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleSelectItem = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowUp') {
-      handleSelectIdx(1);
-      console.log('up');
+      handleSelectIdx('up');
     } else if (e.key === 'ArrowDown') {
-      console.log('down');
-      handleSelectIdx(2);
+      handleSelectIdx('down');
+    } else if (e.key === 'Enter') {
+      if (searchKeyword[currentIdx]) {
+        await debounsItem(searchKeyword[currentIdx].objectID, setSearchItem);
+      }
     }
   };
 
@@ -28,7 +64,6 @@ const SearchForm: React.FC<SearchFormProps> = ({ handleSelectIdx }) => {
     <form onSubmit={onSubmit}>
       <input
         type="text"
-        value={inputValue}
         onChange={handleSearchKeyword}
         onKeyUp={handleSelectItem}
       />

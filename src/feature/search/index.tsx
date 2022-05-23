@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import searchKeywordState from '../../store/searchkeyword';
+import SearchKeywordState from '../../store/searchkeyword';
 
 import SearchForm from './searchForm';
 import SearchKeyword from './searchKeyword';
@@ -9,9 +9,10 @@ import SearchKeyword from './searchKeyword';
 interface SearchFeatureProps {}
 
 const SearchFeature: React.FC<SearchFeatureProps> = () => {
+  /** 이부분 커스텀훅으로 뺴도 이상 없어보인다. */
   const [currentKeyword, setCurrentKeyword] = useState(0);
-  const searchkeywords = useRecoilValue(searchKeywordState);
-  
+  const searchkeywords = useRecoilValue(SearchKeywordState);
+
   const handleCurrentIdx = (value: 'up' | 'down' | 'reset') => {
     if (value === 'reset') {
       setCurrentKeyword(0);
@@ -29,7 +30,10 @@ const SearchFeature: React.FC<SearchFeatureProps> = () => {
   return (
     <main>
       <h1>검색 콤보 박스</h1>
-      <SearchForm handleSelectIdx={handleCurrentIdx} />
+      <SearchForm
+        currentIdx={currentKeyword}
+        handleSelectIdx={handleCurrentIdx}
+      />
       <SearchKeyword currentIdx={currentKeyword} />
     </main>
   );
