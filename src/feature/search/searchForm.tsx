@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-interface SearchFormProps {}
+interface SearchFormProps {
+  handleSelectIdx: (value: number) => void;
+}
 
-const SearchForm: React.FC<SearchFormProps> = () => {
+const SearchForm: React.FC<SearchFormProps> = ({ handleSelectIdx }) => {
   const [inputValue, setInputValue] = useState('');
 
   const onSubmit = (e: React.FormEvent) => {
@@ -14,9 +16,11 @@ const SearchForm: React.FC<SearchFormProps> = () => {
   };
   const handleSelectItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowUp') {
+      handleSelectIdx(1);
       console.log('up');
     } else if (e.key === 'ArrowDown') {
       console.log('down');
+      handleSelectIdx(2);
     }
   };
 
