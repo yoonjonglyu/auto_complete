@@ -1,33 +1,15 @@
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import _ from 'underscore';
 
 import SearchKeywordState from '../../store/searchkeyword';
 import SearchItemState from '../../store/searchItem';
 
-import SearchApi from '../../lib/api/search';
+import { debounsSearch, debounsItem } from '../../lib/hooks/search';
 
 interface SearchFormProps {
   currentIdx: number;
   handleSelectIdx: (value: 'up' | 'down' | 'reset') => void;
 }
-
-const debounsSearch = _.debounce(
-  async (keyword: string, callback: Function) => {
-    const Api = new SearchApi();
-    const data = await Api.getSearchKeyword(keyword);
-    callback(data);
-  },
-  300
-);
-const debounsItem = _.debounce(
-  async (currentIdx: string, callback: Function) => {
-    const Api = new SearchApi();
-    const data = await Api.getSearchItem(currentIdx);
-    callback(data);
-  },
-  300
-);
 
 const SearchForm: React.FC<SearchFormProps> = ({
   currentIdx,
