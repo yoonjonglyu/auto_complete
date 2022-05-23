@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import _ from 'underscore';
 
