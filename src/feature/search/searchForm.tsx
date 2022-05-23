@@ -1,10 +1,22 @@
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import Styled from 'styled-components';
 
 import SearchKeywordState from '../../store/searchkeyword';
 import SearchItemState from '../../store/searchItem';
 
 import { debounsSearch, debounsItem } from '../../lib/hooks/search';
+
+const Form = Styled.form`
+  width: 90%;
+  margin: 0 auto;
+`;
+const SearchBox = Styled.input`
+  width: 100%;
+  height: 30px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+`
 
 interface SearchFormProps {
   currentIdx: number;
@@ -43,13 +55,13 @@ const SearchForm: React.FC<SearchFormProps> = ({
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
+    <Form onSubmit={onSubmit}>
+      <SearchBox
         type="text"
         onChange={handleSearchKeyword}
         onKeyUp={handleSelectItem}
       />
-    </form>
+    </Form>
   );
 };
 
