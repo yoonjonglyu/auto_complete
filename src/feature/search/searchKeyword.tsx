@@ -53,6 +53,7 @@ const SearchKeyword: React.FC<SearchKeywordProps> = ({
             onClick={() => handleItem(keyword.objectID, idx)}
           />
         ))}
+        {searchKeyword.length === 0 && <Li>매칭 되는 검색 결과가 없습니다.</Li>}
       </Ul>
     </section>
   );
