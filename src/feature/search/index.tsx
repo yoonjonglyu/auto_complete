@@ -35,7 +35,10 @@ const SearchFeature: React.FC<SearchFeatureProps> = () => {
         currentIdx={currentKeyword}
         handleSelectIdx={handleCurrentIdx}
       />
-      <SearchKeyword currentIdx={currentKeyword} />
+      <SearchKeyword
+        currentIdx={currentKeyword}
+        handleCurrentIdx={setCurrentKeyword}
+      />
       <SearchResult />
     </main>
   );
