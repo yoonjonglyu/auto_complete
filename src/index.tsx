@@ -10,7 +10,7 @@ if (root === null) {
   console.error('루트를 찾을 수 없습니다.');
 } else {
   createRoot(root).render(
-    <Router>
+    <Router basename='/auto_complete'>
       <App />
     </Router>
   );
